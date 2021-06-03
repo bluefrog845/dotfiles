@@ -1,11 +1,22 @@
 
 alias ll='ls -l --color=auto'
 alias rm='rm -i'
-alias refrc='source ~/.bashrc'
 # alias jconf='printf "~/.bashrc\n~/.tmux.conf" | fzf-tmux -p 50'
 # alias dconf='printf "j2conf\necho 1" | fzf-tmux -p 50' 
 
-# j2conf() {
+refrc()
+{
+  local checksum
+  checksum="$1"
+  if [ -z "$1" ]; then
+    chksum="$(cat ~/.bashrc ~/.mindtree ~/.mindtree.conf ~/.bashpersonal |md5sum)"
+  fi
+  echo "$chksum" > ~/.chksum  
+  echo -e "\nUpdating bashrc\n" > "$(tty)"
+  source ~/.bashrc
+}
+ 
+# j2conf() { 
 # printf "~/.bashrc\n~/.tmux.conf" | fzf-tmux -p 50 
 # }
 
