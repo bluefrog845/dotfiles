@@ -1,0 +1,94 @@
+
+alias ll='ls -l --color=auto'
+alias rm='rm -i'
+alias refrc='source ~/.bashrc'
+# alias jconf='printf "~/.bashrc\n~/.tmux.conf" | fzf-tmux -p 50'
+# alias dconf='printf "j2conf\necho 1" | fzf-tmux -p 50' 
+
+# j2conf() {
+# printf "~/.bashrc\n~/.tmux.conf" | fzf-tmux -p 50 
+# }
+
+
+# fconf ()
+# {
+#   $1 `jconf`
+# }
+
+
+jcolor()
+{
+	for i in {0..255}; do  printf "\x1b[38;5;${i}mcolor%-5i\x1b[0m" $i ; if ! (( ($i + 1 ) % 8 )); then echo ; fi ; done
+}
+
+# Will return non-zero status if the current directory is not managed by git
+is_in_git_repo() {
+  git rev-parse HEAD > /dev/null 2>&1
+}
+
+#https://junegunn.kr/2016/07/fzf-git/
+gt() {
+  # "Nothing to see here, move along"
+  is_in_git_repo || return
+
+  # Pass the list of the tags to fzf-tmux
+  # - "{}" in preview option is the placeholder for the highlighted entry
+  # - Preview window can display ANSI colors, so we enable --color=always
+  # - We can terminate `git show` once we have $LINES lines
+  git tag --sort -version:refname |
+    fzf-tmux --multi --preview-window right:70% \
+             --preview 'git show --color=always {} | head -'$LINES
+}
+
+
+bind '"\er": redraw-current-line'
+bind '"\C-g\C-t": "$(gt)\e\C-e\er"'
+
+# top_tree() {
+# output=$(echo -e "dummy\n"\
+#        "config\n"\
+#        "clorp\n"| fzf-tmux -p 50 | sed 's/ *$//g')
+# # output="clorp"
+# case $output in
+#     clorp)
+#     echo "blorp"
+#     ;;
+#     (*)
+#         echo $output
+#     ;;
+# esac
+# # echo $output
+# }
+
+# top_tree2() {
+# # bash newlines messing with the case match???
+# output=$(echo -e "blorp\nclorp\n"|fzf-tmux -p 50)
+# # output="clorp"
+# case $output in
+#     # clorp)
+#     # echo "blorp"
+#     # ;;
+#     (*)
+#         echo $output
+#     ;;
+# esac
+# }
+
+# config() {
+#     directory=~/home/pi/Desktop/dotfiles/dotfiles
+#     find $directory -printf "%f\n"|tail -n +2| fzf-tmux -p 50 |sed 's@^@'"$directory"'@'
+# }
+
+# bind '"\C-g\C-e": "$(`top_tree`)\e\C-e"'
+
+source /home/pi/Desktop/dotfiles/dotfiles/.mindtree.conf
+
+#Open joe tree no enter
+bind '"\ea": "$(mindtree)\e\C-e"'
+#Open joe tree press enter after
+bind '"\e\C-a": "$(mindtree)\e\C-e\n"'
+# flop back into tmux
+bind '"\C-ad": "tmux attach\n"'
+
+bind '"\e[24~":"refrc\n"'
+# bind '"\e[24~":"refrc\n"'

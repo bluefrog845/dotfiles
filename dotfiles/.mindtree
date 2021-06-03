@@ -1,0 +1,37 @@
+[1]config
+	[!].bashrc
+	[!].tmux.conf
+	[!].mindtree
+	[!]mindtree.conf
+	[!].bashpersonal
+[1]dirs
+	[2]personal
+		[!]email
+		[!]glorp
+	[2]work
+		[!]email
+		[!]blorp
+[1]work_dirs
+	[!]/opt/mm//bin
+	[!]/opt/mm/work/xml
+	[!]/opt/mm/work/config
+[1]other_dirs
+	[!]/SVN/trunk
+	[!]/SVN/master
+[!]exit
+#[!]refrc
+
+#^(\t)*config(\n\t.*)*
+#^(\t)*personal(\n\t.*){2}
+
+#^(\t)*dirs(\n\t.*){1,}
+
+#^(\t)*personal(\n(\t){2,}.*)*
+#^(\t)*dirs(\n(\t){1,}.*)*
+
+
+# Starts with any number of tabs or #s. Matches the current word. Then a new line and correct number of tabs (or more) plus any word
+#^[(\t)|#]*dirs(\n(\t){1,}.*)*
+
+#tr '\n' , < .mindtree | grep -o "\[[0-9\1]\]dirs.*master" | tr , '\n'
+1

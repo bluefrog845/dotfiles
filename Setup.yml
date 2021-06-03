@@ -1,0 +1,39 @@
+---
+- name: This is a hello-world example
+  hosts: localhost
+  tasks:
+    - name: Create a symlink to .tmux.conf'.
+      file:
+        src: /home/pi/Desktop/dotfiles/dotfiles/.tmux.conf
+        dest: ~/.tmux.conf
+        owner: pi
+        group: pi
+        state: link
+    - name: Create a symlink to .bashpersonal'.
+      file:
+        src: /home/pi/Desktop/dotfiles/dotfiles/.bashpersonal
+        dest: ~/.bashpersonal
+        owner: pi
+        group: pi
+        state: link
+    - name: Create a symlink to .bashrc'.
+      file:
+        src: /home/pi/Desktop/dotfiles/dotfiles/.bashrc
+        dest: ~/.bashrc
+        owner: pi
+        group: pi
+        state: link
+    - name: Create a symlink to .mindtree'.
+      file:
+        src: /home/pi/Desktop/dotfiles/dotfiles/.mindtree
+        dest: ~/.mindtree
+        owner: pi
+        group: pi
+        state: link      
+    - name: Create a symlink to .mindtree.conf'.
+      file:
+        src: /home/pi/Desktop/dotfiles/dotfiles/.mindtree.conf
+        dest: ~/.mindtree.conf
+        owner: pi
+        group: pi
+        state: link       
