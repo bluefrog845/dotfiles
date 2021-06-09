@@ -37,3 +37,10 @@
         owner: pi
         group: pi
         state: link       
+    - name: Create a symlink to .vimrc'.
+      file:
+        src: /home/pi/Desktop/dotfiles/dotfiles/.vimrc
+        dest: ~/.vimrc
+        owner: pi
+        group: pi
+        state: link       
