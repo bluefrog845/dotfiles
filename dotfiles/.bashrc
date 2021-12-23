@@ -112,7 +112,7 @@ if ! shopt -oq posix; then
   fi
 fi
 
-source /home/pi/Desktop/dotfiles/dotfiles/.bashpersonal
+source ~/.bashpersonal
 
 source ~/.bash_completion
 export PATH=$PATH:/home/pi/.local/bin

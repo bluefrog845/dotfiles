@@ -2,38 +2,57 @@
 - name: This is a hello-world example
   hosts: localhost
   tasks:
+    - name: Create working directory'.
+      ansible.builtin.file:
+        path: "{{ base_path }}/ansible/"
+        state: directory
+        mode: '0755'
+    - name: Download tmux'.
+      get_url:
+        url: https://github.com/tmux/tmux/releases/download/3.2a/tmux-{{ TMUX_VER }}.tar.gz
+        dest: "{{ base_path }}/ansible/"
+        checksum: md5:61fba141303aeaf8d9a6931d247f2f4a
+    - name: unarchive'.
+      ansible.builtin.unarchive:
+        src: "{{ base_path }}/ansible/tmux-{{ TMUX_VER }}.tar.gz"
+        dest: "{{ base_path }}/ansible/"
+        remote_src: no
+    - name: Build tmux'.
+      shell: "cd {{ base_path }}/ansible/tmux-{{ TMUX_VER }}/; ./configure; make; sudo make install"
+      args:
+        creates: "{{ base_path }}/ansible/tmux-{{ TMUX_VER }}/tmux"
     - name: Create a symlink to .tmux.conf'.
       file:
-        src: /home/pi/Desktop/dotfiles/dotfiles/.tmux.conf
+        src: "{{ base_path }}/dotfiles/.tmux.conf"
         dest: ~/.tmux.conf
-        owner: pi
-        group: pi
         state: link
     - name: Create a symlink to .bashpersonal'.
       file:
-        src: /home/pi/Desktop/dotfiles/dotfiles/.bashpersonal
+        src: "{{ base_path }}/dotfiles/.bashpersonal"
         dest: ~/.bashpersonal
-        owner: pi
-        group: pi
         state: link
     - name: Create a symlink to .bashrc'.
       file:
-        src: /home/pi/Desktop/dotfiles/dotfiles/.bashrc
+        src: "{{ base_path }}/dotfiles/.bashrc"
         dest: ~/.bashrc
-        owner: pi
-        group: pi
         state: link
+    - name: Create a symlink to .bash_completion'.
+      file:
+        src: "{{ base_path }}/dotfiles/.bash_completion"
+        dest: ~/.bash_completion
+        state: link
+    - name: Create a symlink to .bash_completion.d'.
+      file:
+        src: "{{ base_path }}/dotfiles/.bash_completion.d"
+        dest: ~/.bash_completion.d
+        state: link 
     - name: Create a symlink to .mindtree'.
       file:
-        src: /home/pi/Desktop/dotfiles/dotfiles/.mindtree
+        src: "{{ base_path }}/dotfiles/.mindtree"
         dest: ~/.mindtree
-        owner: pi
-        group: pi
         state: link      
     - name: Create a symlink to .mindtree.conf'.
       file:
-        src: /home/pi/Desktop/dotfiles/dotfiles/.mindtree.conf
+        src: "{{ base_path }}/dotfiles/.mindtree.conf"
         dest: ~/.mindtree.conf
-        owner: pi
-        group: pi
-        state: link       
+        state: link 

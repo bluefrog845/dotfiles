@@ -92,7 +92,7 @@ bind '"\C-g\C-t": "$(gt)\e\C-e\er"'
 
 # bind '"\C-g\C-e": "$(`top_tree`)\e\C-e"'
 
-source /home/pi/Desktop/dotfiles/dotfiles/.mindtree.conf
+source ~/.mindtree.conf
 
 #Open joe tree no enter
 bind '"\ea": "$(mindtree)\e\C-e"'
