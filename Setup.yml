@@ -56,3 +56,8 @@
         src: "{{ base_path }}/dotfiles/.mindtree.conf"
         dest: ~/.mindtree.conf
         state: link 
+    - name: Create a symlink to scripts'.
+      file:
+        src: "{{ base_path }}/scripts/"
+        dest: ~/.scripts
+        state: link 
