@@ -9,7 +9,7 @@
         mode: '0755'
     - name: Download tmux'.
       get_url:
-        url: https://github.com/tmux/tmux/releases/download/3.2a/tmux-{{ TMUX_VER }}.tar.gz
+        url: https://github.com/tmux/tmux/releases/download/{{ TMUX_VER }}/tmux-{{ TMUX_VER }}.tar.gz
         dest: "{{ base_path }}/ansible/"
         checksum: md5:61fba141303aeaf8d9a6931d247f2f4a
     - name: unarchive'.
@@ -58,12 +58,12 @@
         state: link       
     - name: Create a symlink to .vimrc'.
       file:
-        src: {{ base_path }}/dotfiles/.vimrc
+        src: "{{ base_path }}/dotfiles/.vimrc"
         dest: ~/.vimrc
         state: link       
     - name: Create a symlink to vimwiki'.
       file:
-        src: {{ base_path }}/vimwiki
+        src: "{{ base_path }}/vimwiki"
         dest: ~/vimwiki
         state: link       
         state: link 
