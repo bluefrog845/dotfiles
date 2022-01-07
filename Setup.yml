@@ -44,3 +44,10 @@
         owner: pi
         group: pi
         state: link       
+    - name: Create a symlink to vimwiki'.
+      file:
+        src: /home/pi/Desktop/dotfiles/vimwiki
+        dest: ~/vimwiki
+        owner: pi
+        group: pi
+        state: link       

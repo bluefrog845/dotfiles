@@ -53,3 +53,6 @@ if filereadable("/etc/vim/vimrc.local")
   source /etc/vim/vimrc.local
 endif
 
+set nocompatible
+filetype plugin on
+syntax on
