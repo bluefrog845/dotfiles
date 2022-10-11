@@ -11,7 +11,7 @@
       get_url:
         url: https://github.com/tmux/tmux/releases/download/{{ TMUX_VER }}/tmux-{{ TMUX_VER }}.tar.gz
         dest: "{{ base_path }}/ansible/"
-        checksum: md5:61fba141303aeaf8d9a6931d247f2f4a
+        checksum: md5:8eee5883b9f6550fa4efaad0c9ec38f3
     - name: unarchive'.
       ansible.builtin.unarchive:
         src: "{{ base_path }}/ansible/tmux-{{ TMUX_VER }}.tar.gz"
